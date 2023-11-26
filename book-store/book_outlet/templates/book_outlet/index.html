@@ -7,7 +7,8 @@ All Books
 {%block content%}
 
 <ul>
-
+    <h2>Total Books : {{total}}</h2>
+    <h2>Average Rating : {{avg_rating.rating__avg}}</h2>
     {%for book in books%}
     <li>
         <a href="{{ book.get_url }}">{{ book.title }}</a>
