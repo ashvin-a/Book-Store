@@ -10,7 +10,7 @@ All Books
 
     {%for book in books%}
     <li>
-        {{ book.title }}
+        <a href="{{ book.get_url }}">{{ book.title }}</a>
     </li>
     {% endfor %}
 </ul>
