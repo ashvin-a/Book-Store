@@ -8,8 +8,8 @@ def index(request):
         "books":book
     })
 
-def book_detail(request,id):
-    book = Book.objects.get(pk=id)
+def book_detail(request,slug):
+    book = Book.objects.get(slug=slug)
     return render(request,"book_outlet\ook_detail.html",{
         "title":book.title,
         "author":book.author,
