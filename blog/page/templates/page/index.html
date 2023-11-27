@@ -1,0 +1,16 @@
+{% extends "page/base.html" %}
+
+{% block title%} Workinggg{% endblock %}
+
+{% block content %}
+    <h1>
+        All Blog Posts
+    </h1>
+    <ul>
+        {%for post in posts%}
+        <li>
+            <a href="{{ post.get_url }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    {% endblock  %}
