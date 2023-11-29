@@ -13,3 +13,14 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = '__all__'#You could mention specific fields using ['','']
         # exlude = ['']
+        labels = {
+            "username":"Your Name",
+            "review_text":"Your Review",
+            "rating":"Your Rating"
+        }
+        error_message = {
+            "username":{
+                "required":"Your name must not be empty",
+                "max_length":"Its too lengthy"
+            }
+        }
