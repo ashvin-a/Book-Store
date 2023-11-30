@@ -1,28 +1,82 @@
+from typing import Any
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views import View
+from django.views.generic.base import TemplateView
+from django.views.generic import ListView,DetailView,FormView,CreateView
 from .forms import ReviewForm
+from .models import Review
 
 # Create your views here.
 
-class ReviewView(View):
+# class ReviewView(FormView):
+#     form_class = ReviewForm
+#     template_name = "reviews/reviews.html"
+#     success_url = "/thankuu"
     
-    def post(self,request):
-        form = ReviewForm(request.POST)
-        if form.is_valid():  
-            form.save()         
-            return HttpResponseRedirect("/thankuu")
-        return render(request,"reviews/reviews.html",{
-        "form":form
-    })
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
+    #OR
+class ReviewView(CreateView):
+    form_class = ReviewForm
+    model = Review
+    template_name = "reviews/reviews.html"
+    success_url = "/thankuu"
     
-    def get(self,request):
-        form = ReviewForm()
-        return render(request,"reviews/reviews.html",{
-        "form":form
-    })
+    
+class ThankuView(TemplateView):
+    template_name="reviews/thank_you.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["name"] = "BLAHHHH!"
+        return context
+    
 
-class ThankuView(View):
+class ReviewListView(ListView):
+    template_name = "reviews/review_list.html"
+    model = Review
+    context_object_name = "reviews"
     
-    def get(self,request):
-        return render(request,"reviews/thank_you.html")
+class DetailedView(DetailView):
+    template_name = "reviews/details.html"
+    model = Review
+    
+# class ReviewView(View):
+    
+#     def post(self,request):
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():  
+#             form.save()         
+#             return HttpResponseRedirect("/thankuu")
+#         return render(request,"reviews/reviews.html",{
+#         "form":form
+#     })
+    
+#     def get(self,request):
+#         form = ReviewForm()
+#         return render(request,"reviews/reviews.html",{
+#         "form":form
+#     })
+    
+# class ReviewListView(TemplateView):
+#     template_name="reviews/review_list.html"
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         reviews = Review.objects.all()
+#         context["reviews"] = reviews
+#         return context
+    
+# class DetailedView(TemplateView):
+#     template_name = "reviews/details.html"
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         rev_id = kwargs['id'] #Look at this thing
+#         selected_review = Review.objects.get(pk = rev_id)
+#         context["review"] = selected_review
+#         return context
+    
+    
