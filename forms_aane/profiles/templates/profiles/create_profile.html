@@ -6,7 +6,7 @@
 {% block content %}
     <form action="/profiles/" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="image" />
-        <button>Upload!</button>
+        {{form}}
+        <button>Upload!</button> 
     </form>
 {% endblock content %}
