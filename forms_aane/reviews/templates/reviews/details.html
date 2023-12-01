@@ -6,7 +6,13 @@
 {% block content %}
     <h1>Hey {{review.username}}!</h1>
 
-    <p>Your review: {{review.review_text}}</p>
     <p>Your rating : {{review.rating}}</p>
+    <p>Your review: {{review.review_text}}</p>
+    <form action="/review/favourite" method="POST"> 
+        {% csrf_token %}
+    {% comment %} the '/' in the front of action is important🚶{% endcomment %}
+        <input type="hidden" name="review_id" value="{{review.id}}">
+        <button>Favourite</button>
+    </form>
 
 {% endblock content %}

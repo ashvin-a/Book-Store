@@ -1,5 +1,6 @@
 from typing import Any
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic.base import TemplateView
@@ -42,7 +43,13 @@ class ReviewListView(ListView):
 class DetailedView(DetailView):
     template_name = "reviews/details.html"
     model = Review
-    
+
+class AddFavourite(View):
+    def post(self,request):
+        review_id = request.POST['review_id']
+        fav_review = Review.objects.get(pk=review_id)
+        request.session['favourite_review'] = fav_review
+        return HttpResponseRedirect("/review/"+review_id)
 # class ReviewView(View):
     
 #     def post(self,request):
