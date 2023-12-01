@@ -1,0 +1,13 @@
+{% extends "profiles/base.html" %}
+{% block title %} User Profiles{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for profile in profiles %}
+    <li>
+        <img src="{{profile.image.url}}" alt=""> 
+        {% comment %}Check models.py {% endcomment %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

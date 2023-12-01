@@ -1,4 +1,4 @@
 from django import forms
 
-class ProfileForm(forms.Form):
-    image = forms.FileField()
+# class ProfileForm(forms.Form):
+#     image = forms.ImageField()
